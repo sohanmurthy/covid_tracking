@@ -4,10 +4,10 @@
 color.dark_gray = "#A6A6A6"
 color.light_gray = "#eaeaea"
 
+
 #souce: https://carto.com/carto-colors/
 color.carto_sunset = c("#f3e79b","#fac484","#f8a07e","#eb7f86","#ce6693","#a059a0","#5c53a5")
 color.carto_bold = c("#7F3C8D","#11A579","#3969AC","#F2B701","#E73F74","#80BA5A","#E68310","#008695","#CF1C90","#f97b72","#4b4b8f","#A5AA99")
-
 
 
 #ggplot theme for prettier charts and legends
@@ -34,3 +34,19 @@ theme_set (
       legend.key.height = unit(0.8, "lines")
     )
 )
+
+
+#' 7 day rolling average function
+#' Unlike zoo::rollmean, which doesn't handle NA values, using this will still calculate the mean, even when NA values are present.
+roll_mean_na <- function(data.vector) {
+  return(
+    zoo::rollapply(data.vector, 
+                   width = 7, 
+                   FUN = function(x) { mean(x, na.rm=TRUE) },
+                   by=1, 
+                   by.column=TRUE, 
+                   partial=TRUE, 
+                   fill=NA, 
+                   align="right")
+  )
+}
