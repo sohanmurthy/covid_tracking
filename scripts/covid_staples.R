@@ -7,6 +7,7 @@ library(gganimate)
 
 
 #hospitalized patients by State
+state_hospitalized_grid.plot <-
 state_daily.df %>%
   filter(date >= today() - 60,
          #remove states with incomplete data
@@ -30,10 +31,11 @@ state_daily.df %>%
         axis.text.x = element_text(angle = 45, hjust = 1)) +
   guides(color = guide_legend(override.aes = list(size=1.5)))
 
-ggsave("output/state_hospitalized_grid.png", dpi = 150, width = 7, height = 14)
+ggsave(plot = state_hospitalized_grid.plot, "output/state_hospitalized_grid.png", dpi = 150, width = 7, height = 14)
 
 
 #hospitalized patients by Region
+region_hospitalized_grid <-
 region_daily.df %>%
   filter(date >= today() - 60) %>%
   select(date, region, hospitalized7day, hospitalizedCurrently) %>%
@@ -54,7 +56,7 @@ region_daily.df %>%
         axis.text.x = element_text(angle = 45, hjust = 1)) +
   guides(color = guide_legend(override.aes = list(size=1.5)))
 
-ggsave("output/region_hospitalized_grid.png", dpi = 150, width = 7, height = 6)
+ggsave(plot = region_hospitalized_grid, "output/region_hospitalized_grid.png", dpi = 150, width = 7, height = 6)
 
 
 
