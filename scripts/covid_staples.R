@@ -11,7 +11,7 @@ state_hospitalized_grid.plot <-
 state_daily.df %>%
   filter(date >= today() - 60,
          #remove states with incomplete data
-         !state %in% c( "AL", "AS", "FL", "GU", "HI", "ID", "KS", "MP", "TN", "VI")
+         !state %in% c( "AL", "AS", "GU", "HI", "ID", "KS", "MP", "TN", "VI")
   ) %>%
   select(date, state, hospitalized7day, hospitalizedCurrently) %>%
   melt(id.vars = c("date", "state")) %>%
